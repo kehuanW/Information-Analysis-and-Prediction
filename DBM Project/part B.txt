@@ -1,0 +1,891 @@
+________________________Q1___________________________
+COLUMN make FORMAT A10
+COLUMN model FORMAT A10
+COLUMN year FORMAT 9999
+COLUMN "Date Checked" FORMAT A15
+COLUMN "Start time" FORMAT A12
+COLUMN "Return time" FORMAT A12
+SELECT TO_CHAR(RentalNo,'0000') "Rental number", 
+       startdate "Start date", TO_CHAR(startdate,'HH24:MI:SS') "Start time",
+       returndate "Return date", TO_CHAR(Returndate,'HH24:MI:SS') "Return time", 
+       licenseNo, outNo, make, model,TRUNC((SYSDATE - Year)/365) AS year, 
+       DECODE(datechecked, null, '-', datechecked) "Date Checked"
+FROM   ragreement JOIN vehicle USING (licenseNo)  
+                  LEFT JOIN (SELECT rentalNo, datechecked
+			     FROM   faultreport) USING (rentalNo);
+
+Rental num Start date   Start time   Return date  Return time   LICENSENO  OUTNO MAKE       MODEL       YEAR Date Checked                                                                               
+---------- ------------ ------------ ------------ ------------ ---------- ------ ---------- ---------- ----- ---------------                                                                            
+ 0001      17-FEB-16    10:14:00     19-FEB-16    17:38:00          50003    903 Buick      Encore         3 20-FEB-16                                                                                  
+ 0003      15-NOV-16    12:30:00     03-DEC-16    13:30:00          50010    902 Volkswagen Polo           5 03-DEC-16                                                                                  
+ 0004      01-JAN-17    08:30:00     09-JAN-17    10:21:00          50003    903 Buick      Encore         3 09-JAN-17                                                                                  
+ 0006      01-JAN-17    12:13:00     09-JAN-17    16:22:00          50011    903 Volkswagen Polo           7 09-JAN-17                                                                                  
+ 0007      01-JAN-17    17:40:00     09-JAN-17    12:30:00          50011    903 Volkswagen Polo           7 09-JAN-17                                                                                  
+ 0009      14-NOV-17    08:21:00     01-DEC-17    11:07:00          50019    903 Audi       A3             3 10-DEC-17                                                                                  
+ 0010      07-JAN-18    17:00:00     12-JAN-18    16:32:00          50015    903 Toyota     Corona         6 13-JAN-18                                                                                  
+ 0012      08-MAY-18    07:09:00     20-MAY-18    18:34:00          50019    903 Audi       A3             3 22-MAY-18                                                                                  
+ 0014      02-JAN-19    12:30:00     09-JAN-19    12:30:00          50011    903 Volkswagen Polo           7 25-JAN-19                                                                                  
+ 0018      15-MAR-20    08:49:00     19-MAR-20    09:21:00          50016    904 Toyota     Corona         8 23-MAR-20                                                                                  
+ 0029      03-SEP-20    12:34:00     10-SEP-20    16:32:00          50015    903 Toyota     Corona         6 11-SEP-20                                                                                  
+ 0034      12-NOV-20    16:31:00     19-NOV-20    18:09:00          50019    903 Audi       A3             3 20-NOV-20                                                                                  
+ 0031      06-OCT-20    17:21:00     10-OCT-20    14:09:00          50017    901 Audi       A3             6 11-OCT-20                                                                                  
+ 0032      17-OCT-20    14:31:00     24-OCT-20    12:07:00          50018    902 Audi       A3             3 25-OCT-20                                                                                  
+ 0036      13-SEP-20    16:31:00     19-SEP-20    16:09:00          50021    901 BMW        3 Series       8 23-SEP-20                                                                                  
+ 0104      01-AUG-20    12:34:00     06-AUG-20    12:33:00          50009    901 Volkswagen Polo           3 -                                                                                          
+ 0028      01-NOV-20    10:31:00     10-NOV-20    17:07:00          50001    901 Buick      Encore         4 -                                                                                          
+ 0102      06-JUL-20    10:33:00     09-JUL-20    15:23:00          50002    902 Buick      Encore         3 -                                                                                          
+ 0107      23-AUG-20    08:49:00     28-AUG-20    20:32:00          50012    904 Volkswagen Polo           3 -                                                                                          
+ 0025      12-AUG-20    16:31:00     21-AUG-20    10:09:00          50007    903 Ford       F-150          9 -                                                                                          
+ 0024      13-JUL-20    14:31:00     30-JUL-20    10:07:00          50003    903 Buick      Encore         3 -                                                                                          
+ 0103      21-JUL-20    18:49:00     24-JUL-20    13:12:00          50007    903 Ford       F-150          9 -                                                                                          
+ 0005      01-JAN-17    09:20:00     09-JAN-17    19:56:00          50003    903 Buick      Encore         3 -                                                                                          
+ 0008      13-NOV-17    15:30:00     14-NOV-17    12:54:00          50009    901 Volkswagen Polo           3 -                                                                                          
+ 0016      23-NOV-19    16:30:00     27-NOV-19    07:20:00          50020    904 Audi       A3             6 -                                                                                          
+ 0013      08-DEC-18    11:18:00     10-DEC-18    21:00:00          50014    902 Toyota     Corona         2 -                                                                                          
+ 0020      19-JUN-20    16:31:00     30-JUL-20    10:09:00          50005    901 Ford       F-150          7 -                                                                                          
+ 0011      20-FEB-18    12:58:00     26-FEB-18    13:30:00          50021    901 BMW        3 Series       8 -                                                                                          
+ 0114      13-NOV-20    17:00:00     15-NOV-20    12:00:00          50015    903 Toyota     Corona         6 -                                                                                          
+ 0027      13-AUG-20    16:31:00     19-AUG-20    10:09:00          50012    904 Volkswagen Polo           3 -                                                                                          
+ 0112      02-NOV-20    10:00:00     07-NOV-20    10:00:00          50018    902 Audi       A3             3 -                                                                                          
+ 0026      12-MAR-20    11:31:00     23-MAR-20    10:08:00          50009    901 Volkswagen Polo           3 -                                                                                          
+ 0110      21-SEP-20    14:17:00     26-SEP-20    09:00:00          50020    904 Audi       A3             6 -                                                                                          
+ 0015      18-APR-19    13:30:00     23-APR-19    14:30:00          50011    903 Volkswagen Polo           7 -                                                                                          
+ 0101      03-JUL-20    08:49:00     06-JUL-20    09:21:00          50001    901 Buick      Encore         4 -                                                                                          
+ 0021      19-MAY-20    10:34:00     30-MAY-20    14:32:00          50009    901 Volkswagen Polo           3 -                                                                                          
+ 0030      11-SEP-20    14:31:00     17-SEP-20    09:07:00          50016    904 Toyota     Corona         8 -                                                                                          
+ 0105      02-AUG-20    15:56:00     11-AUG-20    11:29:00          50010    902 Volkswagen Polo           5 -                                                                                          
+ 0023      16-AUG-20    16:31:00     25-AUG-20    10:09:00          50006    902 Ford       F-150          7 -                                                                                          
+ 0109      16-SEP-20    19:30:00     19-SEP-20    12:21:00          50019    903 Audi       A3             3 -                                                                                          
+ 0002      02-APR-16    08:24:00     20-APR-16    09:38:00          50008    904 Ford       F-150          6 -                                                                                          
+ 0106      11-AUG-20    16:22:00     20-AUG-20    12:30:00          50011    903 Volkswagen Polo           7 -                                                                                          
+ 0116      22-NOV-20    08:00:00     28-NOV-20    15:00:00          50020    904 Audi       A3             6 -                                                                                          
+ 0115      16-NOV-20    19:00:00     23-NOV-20    13:00:00          50019    903 Audi       A3             3 -                                                                                          
+ 0118      19-OCT-20    10:30:00     26-NOV-20    17:00:00          50012    904 Volkswagen Polo           3 -                                                                                          
+ 0111      01-NOV-20    14:17:00     04-NOV-20    09:00:00          50001    901 Buick      Encore         4 -                                                                                          
+ 0019      19-NOV-20    10:31:00     30-NOV-20    17:07:00          50001    901 Buick      Encore         4 -                                                                                          
+ 0017      03-JAN-20    21:30:00     09-JAN-20    22:40:00          50003    903 Buick      Encore         3 -                                                                                          
+ 0113      09-NOV-20    14:00:00     16-NOV-20    11:00:00          50011    903 Volkswagen Polo           7 -                                                                                          
+ 0108      03-SEP-20    08:49:00     06-SEP-20    09:21:00          50018    902 Audi       A3             3 -                                                                                          
+ 0117      23-NOV-20    10:30:00     27-NOV-20    17:00:00          50008    904 Ford       F-150          6 -                                                                                          
+ 0022      13-APR-20    14:31:00     30-APR-20    10:07:00          50002    902 Buick      Encore         3 -                                                                                          
+ 0035      12-NOV-20    11:31:00     23-NOV-20    17:08:00          50020    904 Audi       A3             6 -                                                                                          
+
+53 rows selected.
+
+
+________________________Q2___________________________
+COLUMN Outlet FORMAT A15
+COLUMN Total_Revenue FORMAT A15
+COLUMN Number_of_Rental FORMAT 999
+COLUMN Average_Revenue FORMAT A15
+COLUMN JUL FORMAT A11
+COLUMN AUG FORMAT A11
+COLUMN SEP FORMAT A11
+SELECT TO_CHAR(DECODE(OutNo,Null,'Outlet Total',OutNo)) AS Outlet,
+       TO_CHAR(SUM(DECODE(TO_CHAR(ReturnDate,'mm'),07,CEIL(ReturnDate -StartDate)*DailyRate,0)),'$99990.99') AS JUL,
+       TO_CHAR(SUM(DECODE(TO_CHAR(ReturnDate,'mm'),08,CEIL(ReturnDate -StartDate)*DailyRate,0)),'$99990.99') AS AUG,
+       TO_CHAR(SUM(DECODE(TO_CHAR(ReturnDate,'mm'),09,CEIL(ReturnDate -StartDate)*DailyRate,0)),'$99990.99') AS SEP,
+       TO_CHAR(SUM(DailyRate*CEIL(ReturnDate-StartDate)),'$99990.99') AS Total_Revenue,
+       COUNT(RentalNo) AS Number_of_Rental,
+       TO_CHAR(AVG(DailyRate*CEIL(ReturnDate-StartDate)),'$99990.99') AS Average_Revenue
+FROM   Outlet JOIN Vehicle USING(OutNo)
+              JOIN Ragreement USING(LicenseNo)
+WHERE  TO_CHAR(ReturnDate,'YYYY') = EXTRACT(YEAR FROM SYSDATE)
+  AND  TO_CHAR(ReturnDate,'Q') = 3
+GROUP BY GROUPING SETS(OutNo,());
+
+OUTLET          JUL         AUG         SEP         TOTAL_REVENUE   NUMBER_OF_RENTAL AVERAGE_REVENUE                                                                                                    
+--------------- ----------- ----------- ----------- --------------- ---------------- ---------------                                                                                                    
+901               $1706.00     $185.00     $228.00    $2119.00                     4    $529.75                                                                                                         
+902                $140.00     $639.00     $140.00     $919.00                     4    $229.75                                                                                                         
+903                $663.00     $603.00     $371.00    $1637.00                     6    $272.83                                                                                                         
+904                  $0.00     $372.00     $347.00     $719.00                     4    $179.75                                                                                                         
+Outlet Total      $2509.00    $1799.00    $1086.00    $5394.00                    18    $299.67 
+
+
+________________________Q3___________________________
+*******comment starts********
+We find information that odometer can be reset to zero, so we choose to find the most
+recent ragreement, and choose that MileageAfter as current odometer reading cause 
+the odemeter may be reset, so we can not use the max MileageAfter.
+*******comment ends********
+
+COLUMN licenseNo FORMAT 999999999
+COLUMN make FORMAT A12
+COLUMN model FORMAT A10
+COLUMN "Age" FORMAT 9999
+COLUMN "Miles driven" FORMAT A15
+COLUMN odometer FORMAT A10
+COLUMN "#Report" FORMAT 999999
+SELECT licenseNo "License Number", make, model, TRUNC((SYSDATE - Year)/365) "Age", 
+       TO_CHAR(NVL(SUM(mileageAfter-mileageBefore),0), '999,990.99') "Miles driven", 
+       TO_CHAR(NVL(odometer,0), '999990.99') odometer,
+       COUNT(ReportNum) "#Report"
+FROM   vehicle LEFT JOIN ragreement USING (LicenseNo)
+	       LEFT JOIN faultreport USING (RentalNo,LicenseNo)
+	            JOIN (SELECT licenseNo, MileageAfter AS odometer
+			  FROM   (SELECT ROW_NUMBER() OVER(PARTITION BY LicenseNo ORDER BY ReturnDate DESC) RN,
+                                  LicenseNo,MileageAfter
+                                  FROM Vehicle LEFT JOIN Ragreement USING(LicenseNo))
+                          WHERE RN = 1) USING(LicenseNo)
+WHERE TRUNC((SYSDATE - YEAR)/365) >= 3
+GROUP BY licenseNo, make, model, year, odometer;
+
+
+License Number MAKE         MODEL        Age Miles driven    ODOMETER   #Report                                                                                                                         
+-------------- ------------ ---------- ----- --------------- ---------- -------                                                                                                                         
+         50010 Volkswagen   Polo           5    1,926.43        6412.45       1                                                                                                                         
+         50019 Audi         A3             3    5,603.78       10046.87       3                                                                                                                         
+         50007 Ford         F-150          9    4,386.10        6845.88       0                                                                                                                         
+         50020 Audi         A3             6    4,425.10        5999.89       0                                                                                                                         
+         50021 BMW          3 Series       8    2,662.59        6895.90       1                                                                                                                         
+         50022 BMW          3 Series       7        0.00           0.00       0                                                                                                                         
+         50001 Buick        Encore         4    9,110.33        6889.67       0                                                                                                                         
+         50012 Volkswagen   Polo           3    3,426.94        4234.29       0                                                                                                                         
+         50023 BMW          3 Series       6        0.00           0.00       0                                                                                                                         
+         50004 Buick        Encore         5        0.00           0.00       0                                                                                                                         
+         50018 Audi         A3             3    4,719.35        5764.43       1                                                                                                                         
+         50005 Ford         F-150          7    2,580.00        6879.67       0                                                                                                                         
+         50011 Volkswagen   Polo           7    5,017.95        5356.64       3                                                                                                                         
+         50016 Toyota       Corona         8    6,928.90        7867.34       1                                                                                                                         
+         50017 Audi         A3             6      660.15        3879.82       1                                                                                                                         
+         50015 Toyota       Corona         6    3,139.19        6662.64       2                                                                                                                         
+         50002 Buick        Encore         3    4,667.48        3451.25       0                                                                                                                         
+         50003 Buick        Encore         3    8,820.61        6887.34       2                                                                                                                         
+         50008 Ford         F-150          6    1,788.82        7725.89       0                                                                                                                         
+         50013 Toyota       Corona         4        0.00           0.00       0                                                                                                                         
+         50006 Ford         F-150          7    2,560.21        6879.88       0                                                                                                                         
+         50009 Volkswagen   Polo           3    6,597.41        4513.54       0                                                                                                                         
+
+22 rows selected.
+
+
+________________________Q4___________________________
+******comment starts*******
+The two measures we choose are rental number and faultreport number.
+Managers may look into the rental number, they can know which kind
+of car is popular among clients. Then managers can purchase this kind
+of cars to increase the revenue.
+Managers may also look into the faultreport number, if this kind of
+car's faultreport number is low or zero, it means this car is of good
+quality, it doesn't need to be repaired frequently, so it may lower
+the cost.
+******comment ends*******
+
+BREAK ON OutNo;
+SELECT OutNo, Make, NVL(Rental_Num,0) AS Rental_Num, NVL(Report_Num,0) AS Report_Num
+FROM   Vehicle JOIN Outlet USING(OutNo)
+               LEFT OUTER JOIN (SELECT OutNo,Make,COUNT(RentalNo) AS Rental_Num, NVL(COUNT(ReportNum),0) AS Report_Num
+                                FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                                                  JOIN Outlet USING(OutNo)
+                                                  LEFT OUTER JOIN Faultreport USING(RentalNo,LicenseNo)
+                                GROUP BY OutNo,Make) USING(OutNo,Make)
+ORDER BY OutNo,Make;
+
+     OUTNO MAKE                 RENTAL_NUM REPORT_NUM                                                                                                                                                   
+---------- -------------------- ---------- ----------                                                                                                                                                   
+       901 Audi                          1          1                                                                                                                                                   
+           BMW                           2          1                                                                                                                                                   
+           Buick                         4          0                                                                                                                                                   
+           Ford                          1          0                                                                                                                                                   
+           Toyota                        0          0                                                                                                                                                   
+           Volkswagen                    4          0                                                                                                                                                   
+       902 Audi                          3          1                                                                                                                                                   
+           BMW                           0          0                                                                                                                                                   
+           Buick                         2          0                                                                                                                                                   
+           Ford                          1          0                                                                                                                                                   
+           Toyota                        1          0                                                                                                                                                   
+           Volkswagen                    2          1                                                                                                                                                   
+       903 Audi                          5          3                                                                                                                                                   
+           BMW                           0          0                                                                                                                                                   
+           Buick                         5          2                                                                                                                                                   
+           Ford                          2          0                                                                                                                                                   
+           Toyota                        3          2                                                                                                                                                   
+           Volkswagen                    6          3                                                                                                                                                   
+       904 Audi                          4          0                                                                                                                                                   
+           BMW                           0          0                                                                                                                                                   
+           Buick                         0          0                                                                                                                                                   
+           Ford                          2          0                                                                                                                                                   
+           Toyota                        2          1                                                                                                                                                   
+           Volkswagen                    3          0                                                                                                                                                   
+
+24 rows selected.
+
+
+________________________Q5___________________________
+COLUMN Make FORMAT A12
+COLUMN Quarter FORMAT A8
+COLUMN FaultNum FORMAT 99999
+COLUMN RentalNo FORMAT 99999
+COLUMN Percentage FORMAT A10
+COLUMN Rank FORMAT 99999
+BREAK ON Quarter;
+SELECT TO_CHAR(StartDate,'Q') AS Quarter, Make, COUNT(ReportNum) AS FaultNum,
+       COUNT(rentalNo) RentalNum,
+       TO_CHAR(COUNT(ReportNum)/COUNT(rentalNo) * 100,'990.99') || '%' as percentage,
+       DENSE_RANK() OVER (partition BY TO_CHAR(StartDate,'Q') ORDER BY COUNT(ReportNum)/COUNT(rentalNo) DESC) Rank
+FROM   Ragreement LEFT JOIN Vehicle USING(LicenseNo)
+       LEFT OUTER JOIN Faultreport USING(RentalNo,LicenseNo)
+WHERE EXTRACT (YEAR FROM Startdate) = EXTRACT(YEAR FROM SYSDATE)
+GROUP BY TO_CHAR(StartDate,'Q'),Make
+ORDER BY Quarter,Rank;
+
+QUARTER  MAKE         FAULTNUM  RENTALNUM PERCENTAGE   RANK                                                                                                                                             
+-------- ------------ -------- ---------- ---------- ------                                                                                                                                             
+1        Toyota              1          1  100.00%        1                                                                                                                                             
+         Buick               0          1    0.00%        2                                                                                                                                             
+         Volkswagen          0          1    0.00%        2                                                                                                                                             
+2        Buick               0          1    0.00%        1                                                                                                                                             
+         Volkswagen          0          1    0.00%        1                                                                                                                                             
+         Ford                0          1    0.00%        1                                                                                                                                             
+3        BMW                 1          1  100.00%        1                                                                                                                                             
+         Toyota              1          2   50.00%        2                                                                                                                                             
+         Buick               0          3    0.00%        3                                                                                                                                             
+         Ford                0          3    0.00%        3                                                                                                                                             
+         Volkswagen          0          5    0.00%        3                                                                                                                                             
+         Audi                0          3    0.00%        3                                                                                                                                             
+4        Audi                3          7   42.86%        1                                                                                                                                             
+         Ford                0          1    0.00%        2                                                                                                                                             
+         Toyota              0          1    0.00%        2                                                                                                                                             
+         Volkswagen          0          2    0.00%        2                                                                                                                                             
+         Buick               0          3    0.00%        2                                                                                                                                             
+
+17 rows selected.
+
+
+________________________Q6___________________________
+COLUMN RentalNo FORMAT A5
+COLUMN StartDate FORMAT A10
+COLUMN ReturnDate FORMAT A10
+COLUMN ClientNo FORMAT 99999
+COLUMN ClientName FORMAT A17
+COLUMN Outlet_Street FORMAT A15
+SELECT TO_CHAR(RentalNo,'0000') AS RentalNo, StartDate, ReturnDate,ClientNo,ClientName,Outlet.Street AS Outlet_Street
+FROM   Outlet JOIN Vehicle USING(OutNo)
+              JOIN Ragreement USING(LicenseNo)
+              JOIN Client USING(ClientNo)
+WHERE  TO_CHAR(StartDate,'MON-YY') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'MON-YY')
+  AND  OutNo IN (SELECT MAX(OutNo)
+                 FROM   Outlet JOIN Vehicle USING(OutNo)
+                               JOIN Ragreement USING(LicenseNo)
+                 WHERE  TO_CHAR(StartDate,'MON-YY') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'MON-YY')
+                 GROUP BY OutNo
+                 HAVING COUNT(*)= (  
+                                   SELECT MAX(COUNT(*))
+        			         FROM   Outlet JOIN Vehicle USING(OutNo)
+                    			  	       JOIN Ragreement USING(LicenseNo)
+                                         WHERE  TO_CHAR(StartDate,'MON-YY') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'MON-YY')
+                                         GROUP BY OutNo));
+
+
+RENTA STARTDATE  RETURNDATE CLIENTNO CLIENTNAME        OUTLET_STREET                                                                                                                                    
+----- ---------- ---------- -------- ----------------- ---------------                                                                                                                                  
+ 0114 13-NOV-20  15-NOV-20     30004 Jones Ana         MAGNOLIA LANE                                                                                                                                    
+ 0113 09-NOV-20  16-NOV-20     30006 Davis Chris       MAGNOLIA LANE                                                                                                                                    
+ 0115 16-NOV-20  23-NOV-20     30009 Moore Henry       MAGNOLIA LANE                                                                                                                                    
+ 0034 12-NOV-20  19-NOV-20     30018 Garcia Willam     MAGNOLIA LANE
+
+
+________________________Q7___________________________   
+COLUMN model FORMAT A10
+COLUMN "#Vehicle" FORMAT 9999
+COLUMN "Percentage" FORMAT A12
+COLUMN "Rank" FORMAT 99999
+SELECT model "Model", N_model "#Vehicle", 
+       TO_CHAR(proportion, '999,990.99') || '%' "Percentage", 
+       rank() over (ORDER BY proportion DESC) "Rank"
+FROM   (SELECT model, N_model, modelrevenue,
+               (modelrevenue/SUM(modelrevenue) over ()) * 100 AS proportion
+        FROM   (SELECT distinct model FROM vehicle)
+                LEFT JOIN (SELECT model,COUNT(model) AS N_model
+                           FROM   vehicle
+                           GROUP BY model) USING (model)
+	        LEFT JOIN (SELECT model, SUM(revenue) AS modelrevenue
+                           FROM   (SELECT model, (returndate-startdate)*dailyrate AS revenue
+                                   FROM   (SELECT licenseNo, model,dailyrate FROM vehicle)
+                                          JOIN (SELECT rentalNo,licenseNo,startdate,returndate FROM ragreement) USING (licenseNo)
+                                   WHERE  7<=extract(month FROM startdate) and extract(month FROM startdate)<=9
+                                           and extract(year FROM startdate) = extract(year FROM sysdate)
+	                                       and returndate is not null)
+                                   GROUP BY model) USING (model)
+        GROUP BY model, N_model, modelrevenue);
+
+Model      #Vehicle Percentage     Rank                                                                                                                                                                 
+---------- -------- ------------ ------                                                                                                                                                                 
+Polo              4       31.33%      1                                                                                                                                                                 
+Encore            4       21.54%      2                                                                                                                                                                 
+F-150             4       19.51%      3                                                                                                                                                                 
+Corona            4       11.85%      4                                                                                                                                                                 
+A3                4        9.49%      5                                                                                                                                                                 
+3 Series          4        6.29%      6                                                                                                                                                                 
+
+6 rows selected.
+
+
+________________________Q8___________________________
+COLUMN OutNo FORMAT 999
+COLUMN EmpNo FORMAT 99999
+COLUMN Name FORMAT A17
+COLUMN Supervisor_Name FORMAT A17
+COLUMN Gender FORMAT A7
+COLUMN Age FORMAT 99
+BREAK ON OutNo;
+SELECT E1.OutNo AS OutNo,E1.EmpNo, E1.Fname||' '||E1.Lname AS Name,
+       DECODE(E2.Fname||' '||E2.Lname,' ','No supervisor',E2.Fname||' '||E2.Lname) AS Supervisor_Name,
+       TO_CHAR(MONTHS_BETWEEN(SYSDATE,E1.HireDate)/12,'90.9') AS Work_Years,
+       FLOOR(MONTHS_BETWEEN(SYSDATE,E1.DOB)/12) AS Age,
+       E1.Gender AS Gender,TO_CHAR(E1.Salary,'$99999') AS Salary,
+       E1.OutNo AS Workplace,
+       NVL(S_Num,0) AS Supervise_Num,
+       DENSE_RANK() OVER (partition by E1.OutNo order by E1.Salary DESC) AS Rank,
+       TO_CHAR((max_salary - E1.Salary),'$99999') AS Difference
+FROM   Employee E1 LEFT OUTER JOIN Employee E2 ON(E2.EmpNo = E1.SupervisorNo)
+                   LEFT OUTER JOIN (SELECT E3.EmpNo AS Emp_No,COUNT(DISTINCT E4.EmpNo) AS S_Num
+                                    FROM   Employee E3,Employee E4
+                                    WHERE  E3.EmpNo = E4.SupervisorNo
+                                    GROUP BY E3.EmpNo) ON (E1.EmpNo = Emp_No)
+                   LEFT OUTER JOIN (SELECT OutNo AS Out_No,MAX(Salary) AS max_salary
+                                    FROM   Employee
+                                    GROUP BY OutNo) ON (E1.OutNo = Out_No);
+
+OUTNO  EMPNO NAME              SUPERVISOR_NAME   WORK_YEARS AGE GENDER  SALARY          WORKPLACE SUPERVISE_NUM       RANK DIFFERENCE                                                                   
+----- ------ ----------------- ----------------- ---------- --- ------- -------------- ---------- ------------- ---------- --------------                                                               
+  901   1025 Cody Young        No supervisor      15.3       32 Male     $20000               901             6          1      $0                                                                      
+        1005 Steve Hall        SAM SMITH          13.5       42 Male     $19000               901             0          2   $1000                                                                      
+        1009 JANICE JONES      TAMARA KZOCHSKY     8.0       27 Male     $18000               901             0          3   $2000                                                                      
+        1013 LISA PORTER       Henry Carter        6.7       27 Female   $15000               901             0          4   $5000                                                                      
+        1017 Jill Bertram      Mary Whitestar      4.9       26 Male     $14000               901             0          5   $6000                                                                      
+        1021 Steve Newton      Kelly Milton        2.5       21 Male     $13000               901             0          6   $7000                                                                      
+        1001 Jim Codd          Joe Smith          16.2       44 Male     $11000               901             0          7   $9000                                                                      
+  902   1014 OSCAR FIELDS      Henry Carter        5.1       24 Male     $17000               902             0          1      $0                                                                      
+        1018 Kate Gates        Mary Whitestar      3.5       24 Female   $16000               902             0          2   $1000                                                                      
+        1022 Willam Belli      Kelly Milton        3.1       26 Male     $15000               902             0          3   $2000                                                                      
+        1002 Peter Chen        Joe Smith          15.0       46 Male     $13000               902             0          4   $4000                                                                      
+        1006 Carol Jones       SAM SMITH           8.5       30 Male     $12000               902             0          5   $5000                                                                      
+        1010 JAMES AUSTIN      TAMARA KZOCHSKY     5.3       25 Male     $10000               902             0          6   $7000                                                                      
+  903   1015 ANTHONY WILKINSON Henry Carter        7.2       26 Male     $19000               903             0          1      $0                                                                      
+        1019 Aria Wheeler      Mary Whitestar      4.5       25 Female   $18000               903             0          2   $1000                                                                      
+        1023 Lisa Swift        Kelly Milton        9.3       29 Female   $17000               903             0          3   $2000                                                                      
+        1003 Adam Miller       Joe Smith          13.7       43 Male     $15000               903             0          4   $4000                                                                      
+        1007 Chris McCarthy    SAM SMITH           7.1       28 Male     $14000               903             0          5   $5000                                                                      
+        1011 SHEILA MARTINEZ   TAMARA KZOCHSKY     6.5       25 Female   $11000               903             0          6   $8000                                                                      
+  904   1016 Henry Carter      Cody Young          4.1       26 Male     $26000               904             3          1      $0                                                                      
+        1024 Kelly Milton      Cody Young          8.0       29 Female   $19000               904             3          2   $7000                                                                      
+        1004 Joe Smith         Cody Young         13.6       43 Male     $17000               904             3          3   $9000                                                                      
+        1008 SAM SMITH         Cody Young          5.1       26 Male     $16000               904             3          4  $10000                                                                      
+        1012 TAMARA KZOCHSKY   Cody Young          2.4       23 Female   $13000               904             3          5  $13000                                                                      
+        1020 Mary Whitestar    Cody Young          3.8       23 Female   $11000               904             3          6  $15000                                                                      
+
+25 rows selected.
+
+
+________________________Q9___________________________
+COLUMN Employee_Name FORMAT A30
+COLUMN Position FORMAT A12
+COLUMN Street FORMAT A18
+SELECT Level,
+       LPAD(' ', 3*(Level - 1)) || EmpNo ||' '||
+       Fname||' '||Lname AS Employee_Name,
+       Position,Street,FaultNum
+FROM   Employee JOIN Outlet USING(OutNo)
+                JOIN (SELECT EmpNo,COUNT(ReportNum) AS FaultNum
+                      FROM   Employee LEFT OUTER JOIN
+                             (SELECT * FROM Faultreport
+                              WHERE (SYSDATE - DateChecked < 90)) USING(EmpNo)
+                      GROUP BY EmpNo) USING(EmpNo)
+START WITH EmpNO = 1025
+CONNECT BY PRIOR EmpNo = SupervisorNo;
+
+     LEVEL EMPLOYEE_NAME                  POSITION     STREET             FAULTNUM                                                                                                                      
+---------- ------------------------------ ------------ ------------------ --------                                                                                                                      
+         1 1025 Cody Young                CEO          EAST SAVANNAH             0                                                                                                                      
+         2    1004 Joe Smith              IT           ROUNDABOUT WAY            0                                                                                                                      
+         3       1001 Jim Codd            IT           EAST SAVANNAH             0                                                                                                                      
+         3       1002 Peter Chen          IT           TILA CIRCLE               0                                                                                                                      
+         3       1003 Adam Miller         IT           MAGNOLIA LANE             0                                                                                                                      
+         2    1008 SAM SMITH              HR           ROUNDABOUT WAY            0                                                                                                                      
+         3       1005 Steve Hall          HR           EAST SAVANNAH             0                                                                                                                      
+         3       1006 Carol Jones         HR           TILA CIRCLE               0                                                                                                                      
+         3       1007 Chris McCarthy      HR           MAGNOLIA LANE             0                                                                                                                      
+         2    1012 TAMARA KZOCHSKY        Marketing    ROUNDABOUT WAY            0                                                                                                                      
+         3       1009 JANICE JONES        Marketing    EAST SAVANNAH             1                                                                                                                      
+         3       1010 JAMES AUSTIN        Marketing    TILA CIRCLE               0                                                                                                                      
+         3       1011 SHEILA MARTINEZ     Marketing    MAGNOLIA LANE             0                                                                                                                      
+         2    1016 Henry Carter           Administive  ROUNDABOUT WAY            0                                                                                                                      
+         3       1013 LISA PORTER         Administive  EAST SAVANNAH             0                                                                                                                      
+         3       1014 OSCAR FIELDS        Administive  TILA CIRCLE               0                                                                                                                      
+         3       1015 ANTHONY WILKINSON   Administive  MAGNOLIA LANE             0                                                                                                                      
+         2    1020 Mary Whitestar         Advertiser   ROUNDABOUT WAY            1                                                                                                                      
+         3       1017 Jill Bertram        Advertiser   EAST SAVANNAH             1                                                                                                                      
+         3       1018 Kate Gates          Advertiser   TILA CIRCLE               0                                                                                                                      
+         3       1019 Aria Wheeler        Advertiser   MAGNOLIA LANE             0                                                                                                                      
+         2    1024 Kelly Milton           Machinist    ROUNDABOUT WAY            0                                                                                                                      
+         3       1021 Steve Newton        Machinist    EAST SAVANNAH             2                                                                                                                      
+         3       1022 Willam Belli        Machinist    TILA CIRCLE               0                                                                                                                      
+         3       1023 Lisa Swift          Machinist    MAGNOLIA LANE             0                                                                                                                      
+
+25 rows selected.
+
+
+________________________Q10___________________________
+COLUMN Vehicle_Num FORMAT 999
+COLUMN Rental_Num FORMAT 99999
+COLUMN AVG_Distance FORMAT 999990.99
+COLUMN RenNum_per_Emp FORMAT 90.9
+SELECT T_Rental.OutNo, T_Emp_Vehicle.Vehicle_N AS Vehicle_Num,
+       T_Rental.Rental_N AS Rental_Num,
+       T_Rental.AVG_D AS AVG_Distance,
+       T_Emp_Vehicle.Emp_N AS Emp_Num,
+       T_Rental.Rental_N/T_Emp_Vehicle.Emp_N AS RenNum_per_Emp
+FROM  (SELECT OutNo, COUNT(RentalNo) AS Rental_N,
+              AVG(MileageAfter - MileageBefore) AS AVG_D
+       FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                         JOIN Outlet USING(OutNo)
+       WHERE  TO_NUMBER(SYSDATE-StartDate) <= 60
+       GROUP BY OutNo)T_Rental,
+      (SELECT OutNo,COUNT(DISTINCT LicenseNo) AS Vehicle_N,
+              COUNT(DISTINCT EmpNo) AS Emp_N
+       FROM   Outlet JOIN Employee USING(OutNo)
+                     JOIN Vehicle USING(OutNo)
+       GROUP BY OutNO)T_Emp_Vehicle
+WHERE T_Rental.OutNo = T_Emp_Vehicle.OutNo;
+
+OUTNO VEHICLE_NUM RENTAL_NUM AVG_DISTANCE    EMP_NUM RENNUM_PER_EMP                                                                                                                                     
+----- ----------- ---------- ------------ ---------- --------------                                                                                                                                     
+  901           6          4      1327.34          7            0.6                                                                                                                                     
+  902           6          2      1665.33          6            0.3                                                                                                                                     
+  903           6          4      1528.92          6            0.7                                                                                                                                     
+  904           6          4      1940.07          6            0.7    
+
+
+________________________Q11___________________________
+COLUMN period FORMAT A10
+COLUMN percentage FORMAT A10
+COLUMN N_start FORMAT 99999
+COLUMN N_return FORMAT 99999
+COLUMN N_transaction FORMAT 99999
+SELECT startperiod AS period, N_start, N_return, N_start + N_return AS N_transaction,
+       TO_CHAR((ratio_to_report(SUM(N_start + N_return)) over())*100, '990.99') || '%' AS percentage
+FROM   (SELECT startperiod, COUNT(rentalNo) AS N_start
+        FROM   (SELECT rentalNo,
+			           (CASE
+						    WHEN TO_CHAR(startdate,'HH24')>= 6 AND TO_CHAR(startdate,'HH24')< 12 THEN 'Morning'
+						    WHEN TO_CHAR(startdate,'HH24')>= 12 AND TO_CHAR(startdate,'HH24')< 18 THEN 'Afternoon'
+						    WHEN TO_CHAR(startdate,'HH24')>= 18 AND TO_CHAR(startdate,'HH24')< 23 THEN 'Evening'
+			           END) AS startperiod
+                FROM   (SELECT rentalNo, startdate FROM ragreement))
+	            GROUP BY startperiod) JOIN
+       (SELECT returnperiod, COUNT(rentalNo) AS N_return
+	    FROM   (SELECT rentalNo,
+				       (CASE
+							WHEN TO_CHAR(returndate,'HH24')>= 6 AND TO_CHAR(returndate,'HH24')< 12 THEN 'Morning'
+							WHEN TO_CHAR(returndate,'HH24')>= 12 AND TO_CHAR(returndate,'HH24')< 18 THEN 'Afternoon'
+							WHEN TO_CHAR(returndate,'HH24')>= 18 AND TO_CHAR(returndate,'HH24')< 23 THEN 'Evening'
+						END) AS returnperiod
+			    FROM   (SELECT rentalNo,returndate FROM ragreement))
+	            GROUP BY returnperiod) ON (startperiod = returnperiod)
+GROUP BY startperiod, N_start, N_return, N_start + N_return;
+
+PERIOD     N_START N_RETURN N_TRANSACTION PERCENTAGE                                                                                                                                                    
+---------- ------- -------- ------------- ----------                                                                                                                                                    
+Evening          4        6            10    9.43%                                                                                                                                                      
+Morning         21       20            41   38.68%                                                                                                                                                      
+Afternoon       28       27            55   51.89%  
+
+
+________________________Q12___________________________
+COLUMN MgrNo FORMAT 9999
+COLUMN MgrName FORMAT A17
+COLUMN OutletNum FORMAT 999
+COLUMN RenNum_per_Outlet FORMAT 990.99
+COLUMN ReportNum_per_Outlet FORMAT 990.99
+SELECT T_Mgr.MNO AS MgrNo,
+       T_Mgr.MName AS MgrName,
+       DECODE(T_Mgr.Outlet_N,NULL,0,T_Mgr.Outlet_N) AS OutletNum,
+       DECODE(T_RenNum.Ren_N/T_Mgr.Outlet_N,NULL,0,T_RenNum.Ren_N/T_Mgr.Outlet_N) 
+       AS RenNum_per_Outlet,
+       DECODE(T_ReportNum.Report_N/T_Mgr.Outlet_N,NULL,0,T_ReportNum.Report_N/T_Mgr.Outlet_N) 
+       AS ReportNum_per_Outlet
+FROM
+       (SELECT ManagerNo AS MNO, COUNT(Outlet.OutNo) AS Outlet_N,
+               Fname ||' '||Lname AS MName
+       FROM Outlet, Employee
+       WHERE Outlet.ManagerNo = Employee.EmpNo
+       GROUP BY ManagerNo,Fname,Lname)T_Mgr
+  LEFT JOIN
+       (SELECT ManagerNo,COUNT(RentalNo) AS Ren_N
+       FROM Ragreement,Vehicle,Outlet
+       WHERE Ragreement.LicenseNo = Vehicle.LicenseNo
+         AND Vehicle.OutNo = Outlet.OutNo
+       GROUP BY ManagerNo)T_RenNum
+  ON T_Mgr.MNO = T_RenNum.ManagerNo
+  LEFT JOIN
+       (SELECT ManagerNo,COUNT(ReportNum) AS Report_N
+       FROM Faultreport JOIN Employee USING(EmpNo)
+                        JOIN Outlet USING(OutNo)
+       GROUP BY ManagerNo)T_ReportNum
+  ON T_Mgr.MNO = T_ReportNum.ManagerNo
+UNION ALL
+SELECT NULL,'Grand Total:',COUNT(DISTINCT OutNo),
+       COUNT(Ragreement.RentalNo)/COUNT(DISTINCT OutNo),
+       COUNT(ReportNum)/COUNT(DISTINCT OutNo)
+FROM Ragreement JOIN Vehicle USING(LicenseNo)
+                JOIN Outlet USING(OutNo)
+                LEFT JOIN Faultreport ON Faultreport.RentalNo = Ragreement.RentalNo;
+
+
+MGRNO MGRNAME           OUTLETNUM RENNUM_PER_OUTLET REPORTNUM_PER_OUTLET                                                                                                                                
+----- ----------------- --------- ----------------- --------------------                                                                                                                                
+ 1009 JANICE JONES              1             11.00                 2.00                                                                                                                                
+ 1016 Henry Carter              2             10.50                 6.50                                                                                                                                
+ 1019 Aria Wheeler              1             21.00                 0.00                                                                                                                                
+      Grand Total:              4             13.25                 3.75  
+
+
+________________________Q13___________________________
+COLUMN "MON-#Rtl" FORMAT 99999999
+COLUMN "MON-#Rpt" FORMAT 99999999
+COLUMN "TUE-#Rtl" FORMAT 99999999
+COLUMN "TUE-#Rpt" FORMAT 99999999
+COLUMN "WED-#Rtl" FORMAT 99999999
+COLUMN "WED-#Rpt" FORMAT 99999999
+COLUMN "THU-#Rtl" FORMAT 99999999
+COLUMN "THU-#Rpt" FORMAT 99999999
+COLUMN "FRI-#Rtl" FORMAT 99999999
+COLUMN "FRI-#Rpt" FORMAT 99999999
+COLUMN "SAT-#Rtl" FORMAT 99999999
+COLUMN "SAT-#Rpt" FORMAT 99999999
+COLUMN "SUN-#Rtl" FORMAT 99999999
+COLUMN "SUN-#Rpt" FORMAT 99999999
+COLUMN outno      FORMAT A6
+COLUMN "TtlOlt"   FORMAT 999999
+SELECT DECODE(outNo, null, 'TtlDay', outNo) AS outNo,
+       SUM(DECODE (startday,'MON',1,0))	"MON-#Rtl", SUM(DECODE (checkedday,'MON',1,0)) "MON-#Rpt",
+	   SUM(DECODE (startday,'TUE',1,0))	"TUE-#Rtl", SUM(DECODE (checkedday,'TUE',1,0)) "TUE-#Rpt",
+	   SUM(DECODE (startday,'WED',1,0))	"WED-#Rtl", SUM(DECODE (checkedday,'WED',1,0)) "WED-#Rpt",
+	   SUM(DECODE (startday,'THU',1,0))	"THU-#Rtl", SUM(DECODE (checkedday,'THU',1,0)) "THU-#Rpt",
+	   SUM(DECODE (startday,'FIR',1,0))	"FIR-#Rtl", SUM(DECODE (checkedday,'FIR',1,0)) "FIR-#Rpt",
+	   SUM(DECODE (startday,'SAT',1,0))	"SAT-#Rtl", SUM(DECODE (checkedday,'SAT',1,0)) "SAT-#Rpt",
+	   SUM(DECODE (startday,'SUN',1,0))	"SUN-#Rtl", SUM(DECODE (checkedday,'SUN',1,0)) "SUN-#Rpt",
+	   COUNT(rentalNo) + COUNT(reportNum) "TtlOlt"
+FROM   (SELECT outNo, rtl.rentalNo, TO_CHAR(startdate,'DY') AS startday, reportNum, TO_CHAR(datechecked,'DY') AS checkedday
+        FROM   (SELECT outNo, rentalNo, startdate
+		FROM   outlet LEFT JOIN vehicle USING (outNo)
+			      LEFT JOIN ragreement USING (licenseNo)
+		 WHERE  TO_CHAR(sysdate,'mm')-3 <= TO_CHAR(startdate,'mm')
+                   AND  EXTRACT(year FROM sysdate) = EXTRACT(year FROM startdate)) rtl LEFT JOIN
+		(SELECT outNo, rentalNo, datechecked, ReportNum
+		 FROM   outlet LEFT JOIN vehicle USING (outNo)
+			       LEFT JOIN ragreement USING (licenseNo)
+			       LEFT JOIN faultreport USING (rentalNo)
+		 WHERE  TO_CHAR(sysdate,'mm')-3 <= TO_CHAR(datechecked,'mm')
+		   AND  EXTRACT(year FROM sysdate) = EXTRACT(year FROM startdate)) USING (outNo))
+GROUP BY GROUPING SETS (outNo,()); 
+ 
+OUTNO   MON-#Rtl  MON-#Rpt  TUE-#Rtl  TUE-#Rpt  WED-#Rtl  WED-#Rpt  THU-#Rtl  THU-#Rpt   FIR-#Rtl   FIR-#Rpt  SAT-#Rtl  SAT-#Rpt  SUN-#Rtl  SUN-#Rpt  TtlOlt                                            
+------ --------- --------- --------- --------- --------- --------- --------- --------- ---------- ---------- --------- --------- --------- --------- -------                                            
+901            0         0         2         0         0         5         2         0          0          0         0         0         6         5      20                                            
+902            1         0         0         0         0         0         1         0          0          0         1         0         0         3       6                                            
+903            4         0         0         0         2         0         4         0          0          0         0         0         0         0      24                                            
+904            3         0         0         0         0         0         1         0          0          0         0         0         1         0       6                                            
+TtlDay         8         0         2         0         2         5         8         0          0          0         1         0         7         8      56                                            
+
+
+________________________Q14___________________________
+SELECT ClientName, SUM(DailyRate*CEIL(ReturnDate-StartDate)) AS Revenue_OR_RentalNum
+FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                JOIN Client USING(ClientNo)
+WHERE  TO_CHAR(StartDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+GROUP  BY ClientName
+HAVING SUM(DailyRate*CEIL(ReturnDate-StartDate)) = (
+                                                    SELECT MAX(SUM(DailyRate*CEIL(ReturnDate-StartDate)))
+                                                    FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                                                                      JOIN Client USING(ClientNo)
+     	                                            WHERE  TO_CHAR(StartDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+                                                    GROUP BY ClientNo)
+UNION ALL
+SELECT ClientName, COUNT(RentalNo) AS Revenue_OR_RentalNum
+FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                  JOIN Client USING(ClientNo)
+WHERE  TO_CHAR(StartDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+GROUP  BY ClientName
+HAVING COUNT(RentalNo) = (SELECT MAX(COUNT(RentalNo))
+                          FROM   Ragreement JOIN Vehicle USING(LicenseNo)
+                                            JOIN Client USING(ClientNo)
+                          WHERE  TO_CHAR(StartDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+                          GROUP BY ClientNo);
+
+CLIENTNAME        REVENUE_OR_RENTALNUM                                                                                                                                                                  
+----------------- --------------------                                                                                                                                                                  
+Kris Green                        1558                                                                                                                                                                  
+Davis Chris                          3                                                                                                                                                                  
+Smith Scott                          3                                                                                                                                                                  
+Robinson Johnson                     3
+
+
+________________________Q15___________________________
+COLUMN outNo FORMAT 99999
+COLUMN state FORMAT A5
+COLUMN proportion FORMAT A10
+COLUMN N_client FORMAT 99999999
+COLUMN N_rental FORMAT 99999999
+SELECT outNo, state, N_client, N_rental,N_totalclient,N_totalrental,
+       TO_CHAR(N_rental/N_totalrental * 100, '90.99') || '%' AS Rental_proportion,
+       TO_CHAR(N_client/N_totalclient * 100, '90.99') || '%' AS Client_proportion
+FROM  (SELECT outNo, Outlet.state AS state, COUNT(distinct ClientNo) AS N_client, COUNT(rentalNo) AS N_rental
+       FROM   Outlet LEFT JOIN Vehicle USING(OutNo)
+                     LEFT JOIN Ragreement USING(LicenseNo)
+                     JOIN Client USING(ClientNo)
+       WHERE Outlet.state = Client.state
+       GROUP BY outNo, Outlet.state) 
+       JOIN 
+      (SELECT outNo, COUNT(DISTINCT ClientNo) AS N_totalclient, COUNT(rentalNo) AS N_totalrental
+       FROM   Outlet LEFT JOIN Vehicle USING(OutNo)
+                     LEFT JOIN Ragreement USING(LicenseNo)
+       GROUP BY OutNo) USING (OutNo)
+ORDER BY OutNo;
+
+ OUTNO STATE  N_CLIENT  N_RENTAL N_TOTALCLIENT N_TOTALRENTAL RENTAL_PROPORT CLIENT_PROPORT                                                                                                              
+------ ----- --------- --------- ------------- ------------- -------------- --------------                                                                                                              
+   901 GA            4         5            10            12  41.67%         40.00%                                                                                                                     
+   902 IL            2         2             7             9  22.22%         28.57%                                                                                                                     
+   903 FL            2         2            15            21   9.52%         13.33%                                                                                                                     
+   904 NJ            1         1            10            11   9.09%         10.00% 
+
+
+________________________Q16___________________________
+******comment starts*******
+In statistics, the quarter needs to arrange the numbers from small to large,
+but in this question, we need to arrange the revenue, so I think it should
+be range from high revenue to low revenue, this makes sense, instead of rank
+from low to high, because the company wants to know who is the client that
+spends the most money, so I arranged revenue from high to low.
+******comment ends*******
+
+SELECT ClientNo,ClientName, TO_CHAR(NVL(Total_Amount,0),'$99990.99') AS Total_Amount,
+       NTILE(4) OVER (order by Total_Amount DESC NULLS LAST) AS Quartile
+FROM   Client LEFT OUTER JOIN (SELECT ClientNo,SUM(DailyRate*CEIL(ReturnDate-StartDate)) AS Total_Amount
+                               FROM Ragreement JOIN Vehicle USING(LicenseNo)
+                               GROUP BY ClientNo) USING (ClientNo);
+
+CLIENTNO CLIENTNAME        TOTAL_AMOUNT           QUARTILE                                                                                                                                              
+-------- ----------------- -------------------- ----------                                                                                                                                              
+   30026 Kris Green          $1558.00                    1                                                                                                                                              
+   30021 Robinson Johnson    $1536.00                    1                                                                                                                                              
+   30011 Thomas Stan         $1487.00                    1                                                                                                                                              
+   30005 Brown Adam          $1273.00                    1                                                                                                                                              
+   30025 Ariana Green         $814.00                    1                                                                                                                                              
+   30018 Garcia Willam        $792.00                    1                                                                                                                                              
+   30017 Thomson Steve        $728.00                    1                                                                                                                                              
+   30031 Anna Robert          $713.00                    1                                                                                                                                              
+   30013 Smith Scott          $708.00                    2                                                                                                                                              
+   30028 Aria Blue            $595.00                    2                                                                                                                                              
+   30030 Karel Robert         $561.00                    2                                                                                                                                              
+   30006 Davis Chris          $539.00                    2                                                                                                                                              
+   30015 Harris Lisa          $514.00                    2                                                                                                                                              
+   30001 Smith Amelia         $507.00                    2                                                                                                                                              
+   30020 Martinez Swift       $494.00                    2                                                                                                                                              
+   30012 Jackson Jim          $451.00                    2                                                                                                                                              
+   30027 Jane Green           $444.00                    3                                                                                                                                              
+   30022 Clark Howard         $429.00                    3                                                                                                                                              
+   30004 Jones Ana            $367.00                    3                                                                                                                                              
+   30029 Amy Young            $324.00                    3                                                                                                                                              
+   30014 White Chris          $264.00                    3                                                                                                                                              
+   30008 Wilson Jill          $248.00                    3                                                                                                                                              
+   30009 Moore Henry          $231.00                    3                                                                                                                                              
+   30032 Kim Green            $186.00                    3                                                                                                                                              
+   30023 Lewis Donald         $155.00                    4                                                                                                                                              
+   30019 Colin Young          $140.00                    4                                                                                                                                              
+   30010 Taylor Mary          $102.00                    4                                                                                                                                              
+   30024 Walker Hunk            $0.00                    4                                                                                                                                              
+   30003 Williams Bill          $0.00                    4                                                                                                                                              
+   30016 Martin Bob             $0.00                    4                                                                                                                                              
+   30002 Johnson Scott          $0.00                    4                                                                                                                                              
+   30007 Miller Kelly           $0.00                    4                                                                                                                                                   
+
+32 rows selected.
+
+
+________________________Q17___________________________
+COLUMN type FORMAT A28
+COLUMN n_client FORMAT 99999999
+COLUMN N_rental FORMAT 99999999
+SELECT distinct Type, n_client,
+            (SUM(n_rentalperclient) over (partition BY type)) AS n_rental
+FROM   client JOIN (SELECT clientNo, 
+                           (CASE
+				WHEN webaddress IS NULL THEN 'Not Available'
+				WHEN webaddress LIKE '%.edu' THEN 'Educational Institution'
+				WHEN webaddress LIKE '%.gov' THEN 'Government Agency'
+				WHEN webaddress LIKE '%.org' THEN 'For-profit Organization'
+				WHEN webaddress LIKE '%.com' THEN 'For-profit Company'
+				ELSE 'Other'														
+	                    END) AS type
+                    FROM   client) USING (clientNo)
+	       JOIN (SELECT clientNo, COUNT(rentalNo) AS n_rentalperclient 
+                     FROM   client LEFT JOIN (SELECT rentalNo, clientNo 
+                                              FROM   ragreement
+                                              WHERE  extract(year FROM startdate) = extract(year FROM startdate)
+                                                AND  TO_CHAR(startdate,'Q') = TO_CHAR(sysdate,'Q')-1) USING (clientNo)
+                     GROUP BY clientNo) USING (clientNo)
+	       JOIN (SELECT type, COUNT(clientNo) AS n_client  
+                     FROM   (SELECT clientNo, 
+                                   (CASE
+					WHEN webaddress IS NULL THEN 'Not Available'
+					WHEN webaddress LIKE '%.edu' THEN 'Educational Institution'
+					WHEN webaddress LIKE '%.gov' THEN 'Government Agency'
+					WHEN webaddress LIKE '%.org' THEN 'For-profit Organization'
+					WHEN webaddress LIKE '%.com' THEN 'For-profit Company'
+					ELSE 'Other'														
+				    END) AS Type
+			      FROM   client)
+		              GROUP BY type) USING (type);
+				   
+TYPE                          N_CLIENT  N_RENTAL                                                                                                                                                        
+---------------------------- --------- ---------                                                                                                                                                        
+Educational Institution              7         6                                                                                                                                                        
+Other                                4         0                                                                                                                                                        
+Not Available                        2         0                                                                                                                                                        
+Government Agency                    5         4                                                                                                                                                        
+For-profit Organization              3         1                                                                                                                                                        
+For-profit Company                  11         6                                                                                                                                                        
+
+6 rows selected.				   
+
+
+________________________Q18___________________________
+******comment starts*******
+The most active client I think it refers to the client who rents
+the most rentals in the third quarter of this year, active refers
+to frequency, so it means the amount of rentals. And if the company
+wants to find who spends the most money, it may say find out who is
+the richest client. To conclude, we think the most active client means
+the client who has the most rentals.
+******comment ends*******
+
+COLUMN ClientNo FORMAT 99999
+COLUMN ClientName FORMAT A17
+COLUMN ContactName FORMAT A19
+COLUMN Phone FORMAT A16
+SELECT ClientNo, ClientName,
+       Contact_Fname||' '||Contact_Lname AS ContactName,
+       Phone
+FROM   Client
+WHERE  ClientNo IN (
+                    SELECT ClientNo
+                    FROM   Ragreement JOIN Client USING(ClientNo)
+                    WHERE  EXTRACT(YEAR FROM StartDate) = EXTRACT(YEAR FROM SYSDATE)
+                      AND  TO_CHAR(StartDate,'Q') = 3
+                      AND  WebAddress LIKE '%.gov%'
+                    GROUP BY ClientNo
+                    HAVING COUNT(RentalNo) = (
+                                              SELECT MAX(COUNT(RentalNo))
+                                              FROM   Ragreement JOIN Client USING(ClientNo)
+                                              WHERE  TO_CHAR(StartDate,'YY') = TO_CHAR(SYSDATE,'YY')
+                                                AND  TO_CHAR(StartDate,'Q') = 3
+                                                AND  WebAddress LIKE '%.gov%'
+                                              GROUP BY ClientNo));
+
+
+CLIENTNO CLIENTNAME        CONTACTNAME         PHONE                                                                                                                                                    
+-------- ----------------- ------------------- ----------------                                                                                                                                         
+   30011 Thomas Stan       Thomas Train        976-3141-1754  
+
+
+________________________Q19___________________________
+COLUMN table_name FORMAT A13
+COLUMN COLUMN_name FORMAT A15
+COLUMN constraint_name FORMAT A25
+COLUMN constraint_type FORMAT A16
+COLUMN Search_condition FORMAT A30
+COLUMN Table_FK_re FORMAT A15
+COLUMN Column_FK_re FORMAT A15
+SELECT T1.table_name, T1.column_name, T2.constraint_name, T2.constraint_type,
+       Search_condition, T2.table_name Table_FK_re, T2.column_name Column_FK_re
+FROM   (SELECT table_name, column_name, column_id
+        FROM   user_tab_columns) T1 
+		LEFT JOIN (SELECT user_constraints.table_name, column_name,
+                          user_constraints.constraint_name,
+						  (CASE
+							  WHEN UPPER(constraint_type)='C' THEN 'Check or NN'
+							  WHEN UPPER(constraint_type)='P' THEN 'Primary Key'
+							  WHEN UPPER(constraint_type)='R' THEN 'Foreign Key'
+							  WHEN UPPER(constraint_type)='U' THEN 'Unique'
+							  WHEN UPPER(constraint_type)='V' THEN 'With Check option'
+							  WHEN UPPER(constraint_type)='O' THEN 'Read Only option'
+						  END) constraint_type, Search_condition
+                   FROM   user_constraints JOIN user_cons_columns 
+				          ON user_cons_columns.constraint_name=user_constraints.constraint_name) T2
+        ON T1.table_name=T2.table_name AND T1.column_name=T2.column_name
+ORDER BY T1.table_name, column_id, column_name;
+
+TABLE_NAME    COLUMN_NAME     CONSTRAINT_NAME           CONSTRAINT_TYPE  SEARCH_CONDITION               TABLE_FK_RE     COLUMN_FK_RE                                                                                                                                                                        
+------------- --------------- ------------------------- ---------------- ------------------------------ --------------- ---------------                                                                                                                                                                     
+CLIENT        CLIENTNO        CLIENT_CLIENTNO_PK        Primary Key                                     CLIENT          CLIENTNO                                                                                                                                                                            
+CLIENT        CLIENTNAME                                                                                                                                                                                                                                                                                    
+CLIENT        STREET                                                                                                                                                                                                                                                                                        
+CLIENT        CITY                                                                                                                                                                                                                                                                                          
+CLIENT        STATE           CLIENT_STATE_CK           Check or NN      State In ('AL','AK','AZ','AR', CLIENT          STATE                                                                                                                                                                               
+                                                                         'CA','CO','CT','DE','FL','GA',                                                                                                                                                                                                     
+                                                                         'HI','ID','IL','IN',                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                            
+CLIENT        ZIPCODE                                                                                                                                                                                                                                                                                       
+CLIENT        WEBADDRESS      CLIENT_WEBADDRESS_CK      Check or NN      WebAddress LIKE 'http%://%'    CLIENT          WEBADDRESS                                                                                                                                                                          
+CLIENT        CONTACT_FNAME                                                                                                                                                                                                                                                                                 
+CLIENT        CONTACT_LNAME                                                                                                                                                                                                                                                                                 
+CLIENT        PHONE           CLIENT_PHONE_CK           Check or NN      REGEXP_LIKE(Phone, '^([0-9]{3} CLIENT          PHONE                                                                                                                                                                               
+                                                                         -[0-9]{4}-[0-9]{4})$')                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                            
+CLIENT        EMAIL                                                                                                                                                                                                                                                                                         
+EMPLOYEE      EMPNO           EMPLOYEE_EMPNO_PK         Primary Key                                     EMPLOYEE        EMPNO                                                                                                                                                                               
+EMPLOYEE      LNAME                                                                                                                                                                                                                                                                                         
+EMPLOYEE      FNAME                                                                                                                                                                                                                                                                                         
+EMPLOYEE      POSITION                                                                                                                                                                                                                                                                                      
+EMPLOYEE      PHONE           EMPLOYEE_PHONE_CK         Check or NN      REGEXP_LIKE(Phone, '^([0-9]{3} EMPLOYEE        PHONE                                                                                                                                                                               
+                                                                         -[0-9]{4}-[0-9]{4})$')                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                            
+EMPLOYEE      EMAIL           EMPLOYEE_EMAIL_CK         Check or NN      Email LIKE '%_@carrental.com'  EMPLOYEE        EMAIL                                                                                                                                                                               
+EMPLOYEE      DOB             EMPLOYEE_AGE_CK           Check or NN      (HireDate - DOB)/365 > 14      EMPLOYEE        DOB                                                                                                                                                                                 
+EMPLOYEE      GENDER          EMPLOYEE_GENDER_CK        Check or NN      Gender In ('Female', 'Male')   EMPLOYEE        GENDER                                                                                                                                                                              
+EMPLOYEE      SALARY                                                                                                                                                                                                                                                                                        
+EMPLOYEE      HIREDATE        EMPLOYEE_AGE_CK           Check or NN      (HireDate - DOB)/365 > 14      EMPLOYEE        HIREDATE                                                                                                                                                                            
+EMPLOYEE      OUTNO           EMPLOYEE_OUTNO_FK         Foreign Key                                     EMPLOYEE        OUTNO                                                                                                                                                                               
+EMPLOYEE      SUPERVISORNO    EMPLOYEE_SUPERVISORNO_FK  Foreign Key                                     EMPLOYEE        SUPERVISORNO                                                                                                                                                                        
+FAULTREPORT   REPORTNUM       FAULTREPORT_REPORTNUM_PK  Primary Key                                     FAULTREPORT     REPORTNUM                                                                                                                                                                           
+FAULTREPORT   DATECHECKED                                                                                                                                                                                                                                                                                   
+FAULTREPORT   COMMENTS                                                                                                                                                                                                                                                                                      
+FAULTREPORT   EMPNO           FAULTREPORT_EMPNO_FK      Foreign Key                                     FAULTREPORT     EMPNO                                                                                                                                                                               
+FAULTREPORT   LICENSENO       FAULTREPORT_LICENSENO_FK  Foreign Key                                     FAULTREPORT     LICENSENO                                                                                                                                                                           
+FAULTREPORT   RENTALNO        FAULTREPORT_RENTALNO_FK   Foreign Key                                     FAULTREPORT     RENTALNO                                                                                                                                                                            
+OUTLET        OUTNO           OUTLET_OUTNO_PK           Primary Key                                     OUTLET          OUTNO                                                                                                                                                                               
+OUTLET        STREET                                                                                                                                                                                                                                                                                        
+OUTLET        CITY                                                                                                                                                                                                                                                                                          
+OUTLET        STATE           OUTLET_STATE_CK           Check or NN      State In ('AL','AK','AZ','AR', OUTLET          STATE                                                                                                                                                                               
+                                                                         'CA','CO','CT','DE','FL','GA',                                                                                                                                                                                                     
+                                                                         'HI','ID','IL','IN',                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                            
+OUTLET        ZIPCODE                                                                                                                                                                                                                                                                                       
+OUTLET        PHONE           OUTLET_PHONE_CK           Check or NN      REGEXP_LIKE(Phone, '^([0-9]{3} OUTLET          PHONE                                                                                                                                                                               
+                                                                         -[0-9]{4}-[0-9]{4})$')                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                            
+OUTLET        MANAGERNO       OUTLET_MANAGERNO_FK       Foreign Key                                     OUTLET          MANAGERNO                                                                                                                                                                           
+RAGREEMENT    RENTALNO        RAGREEMENT_RENTALNO_PK    Primary Key                                     RAGREEMENT      RENTALNO                                                                                                                                                                            
+RAGREEMENT    STARTDATE                                                                                                                                                                                                                                                                                     
+RAGREEMENT    RETURNDATE                                                                                                                                                                                                                                                                                    
+RAGREEMENT    MILEAGEBEFORE   RAGREEMENT_MILEAGE_CK     Check or NN      MileageAfter > MileageBefore   RAGREEMENT      MILEAGEBEFORE                                                                                                                                                                       
+RAGREEMENT    MILEAGEAFTER    RAGREEMENT_MILEAGE_CK     Check or NN      MileageAfter > MileageBefore   RAGREEMENT      MILEAGEAFTER                                                                                                                                                                        
+RAGREEMENT    INSURANCETYPE                                                                                                                                                                                                                                                                                 
+RAGREEMENT    CLIENTNO        RAGREEMENT_CLIENTNO_FK    Foreign Key                                     RAGREEMENT      CLIENTNO                                                                                                                                                                            
+RAGREEMENT    LICENSENO       RAGREEMENT_LICENSENO_FK   Foreign Key                                     RAGREEMENT      LICENSENO                                                                                                                                                                           
+VEHICLE       LICENSENO       VEHICLE_LICENSENO_PK      Primary Key                                     VEHICLE         LICENSENO                                                                                                                                                                           
+VEHICLE       MAKE                                                                                                                                                                                                                                                                                          
+VEHICLE       MODEL                                                                                                                                                                                                                                                                                         
+VEHICLE       COLOR                                                                                                                                                                                                                                                                                         
+VEHICLE       YEAR            VEHICLE_YEAR_CK           Check or NN      2020-TO_CHAR(year, 'YYYY')<10  VEHICLE         YEAR                                                                                                                                                                                
+VEHICLE       NODOORS                                                                                                                                                                                                                                                                                       
+VEHICLE       CAPACITY                                                                                                                                                                                                                                                                                      
+VEHICLE       DAILYRATE                                                                                                                                                                                                                                                                                     
+VEHICLE       INSPECTIONDATE                                                                                                                                                                                                                                                                                
+VEHICLE       OUTNO           VEHICLE_OUTNO_FK          Foreign Key                                     VEHICLE         OUTNO                                                                                                                                                                               
+
+54 rows selected.

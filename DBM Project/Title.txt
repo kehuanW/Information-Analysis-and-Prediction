@@ -1,0 +1,10 @@
+
+Group number: 56
+Group member: Bofan Xue    (bofanx@andrew.cmu.edu)
+              Kehuan Wang  (kehuanw@andrew.cmu.edu)
+
+script#1.txt is the script to create tables.
+script#2.txt is the script to insert values into tables.
+part B contains the sql statements that we execute and the result of answers.
+For specific questions, we give comments to explain our understanding of query, the definition of specific phrases,
+and help TA and the professor to have a better understanding of our sql statements.
